@@ -3,7 +3,7 @@
 // @namespace   Violentmonkey Scripts
 // @match       https://sheezy.dev/*/gallery/*
 // @match       https://sheezy.art/*/gallery/*
-// @grant       none
+// @homepageURL https://github.com/Exodus-Drake/Redeviated-Advanced-Image-Viewer-Sheezy
 // @version     2024.01.12.0
 // @author      Edael
 // @description 1/8/2024, 9:16:09 PM
