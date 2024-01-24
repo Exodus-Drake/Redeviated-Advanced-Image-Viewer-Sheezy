@@ -296,29 +296,16 @@
 			styleNode.innerHTML = css;
 			document.head.appendChild(styleNode);
 
-			function getContainerType(type) {
-				if (document.querySelector(`${_config.ImgDOM} > canvas`)) {
-					let str = document.querySelector(`${_config.ImgDOM} > canvas`).getAttribute('style');
-					var imgSrc = str.substring(
-						str.indexOf("--src: url('") + 12,
-						str.lastIndexOf("');")
-					);
-					var imgCont = document.querySelector(`${_config.ImgDOM} > canvas`);
-				} else if (document.querySelector(`${_config.ImgDOM} > img`)) {
-					var imgSrc = document.querySelector(`${_config.ImgDOM} > img`).src;
-					var imgCont = document.querySelector(`${_config.ImgDOM} > img`);
-				}
-
-				if (type === 'get') {
-					return imgCont
-				}
-				if (type === 'set') {
-					return imgSrc
+			function getContainerType() {
+        if (document.querySelector(`${_config.ImgDOM} > canvas`)) {
+          return document.querySelector(`${_config.ImgDOM} > canvas`).getAttribute('style').match(/--src:url\('(.*?)'\)/)[1];
+				} else {
+          return document.querySelector(`${_config.ImgDOM} > img`).src;
 				};
-			}
+			};
 
       const modalBtn = `
-        <div
+        <div onclick="openImage(getContainerType());"
           class="absolute translate-center bottom-0 flex h-2x w-2x cursor-pointer items-center justify-center rounded-50 bg-black/75 text-20 font-normal text-white opacity-0 transition-opacity group-hover:opacity-100" style="right: 48px;">
           <i class="not-prose material-symbols-outlined Icon-module__icon__Ykfh8">
             expand_content
@@ -328,12 +315,8 @@
 
       document.querySelector(_config.ImgDOM).insertAdjacentHTML("afterbegin", modalBtn);
 
-			document.querySelector(`${_config.ImgDOM} > div:first-child`).addEventListener('click', () => {
-				openImage(getContainerType('set'));
-			});
-
-      getContainerType('get').addEventListener('click', () => {
-				openImage(getContainerType('set'));
+      document.querySelector(_config.ImgDOM).addEventListener('click', () => {
+				openImage(getContainerType());
 			});
 
       var _dom = {}
