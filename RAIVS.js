@@ -14,10 +14,10 @@
     console.clear();
     //DOM path to image
     const _config = {
-      ImgDOM: '#content > section:first-child > div:first-child > div:nth-child(2) > div > div > div > div',
+      ImgDOM: '#artwork',
     };
 
-		if (document.querySelector(`${_config.ImgDOM} > canvas`) || document.querySelector(`${_config.ImgDOM} > img`)) {
+		if (document.querySelector(`${_config.ImgDOM} canvas`) || document.querySelector(`${_config.ImgDOM} img`)) {
 			const css = `
         #content > section:first-child > div:first-child > div:nth-child(2) > div > div > div > div{
           cursor:zoom-in
@@ -297,10 +297,10 @@
 			document.head.appendChild(styleNode);
 
 			function getContainerType() {
-        if (document.querySelector(`${_config.ImgDOM} > canvas`)) {
-          return document.querySelector(`${_config.ImgDOM} > canvas`).getAttribute('style').match(/--src:url\('(.*?)'\)/)[1];
+        if (document.querySelector(`${_config.ImgDOM} canvas`)) {
+          return document.querySelector(`${_config.ImgDOM} canvas`).getAttribute('style').match(/--src:url\('(.*?)'\)/)[1];
 				} else {
-          return document.querySelector(`${_config.ImgDOM} > img`).src;
+          return document.querySelector(`${_config.ImgDOM} img`).src;
 				};
 			};
 
@@ -312,8 +312,9 @@
           </i>
         </div>
       `;
-
-      document.querySelector(_config.ImgDOM).insertAdjacentHTML("afterbegin", modalBtn);
+			
+			//TODO
+      //document.querySelector(_config.ImgDOM).insertAdjacentHTML("afterbegin", modalBtn);
 
       document.querySelector(_config.ImgDOM).addEventListener('click', () => {
 				openImage(getContainerType());
